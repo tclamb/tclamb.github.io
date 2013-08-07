@@ -5,15 +5,25 @@ $base-font-color: #444;
 
 #comments { display: none; }
 body {
-  font-family: "Hiragino Mincho ProN", Georgia, Times, "Times New Roman", serif, "IPA明朝";
+  max-width: #{$max-width};
+  font-family: "Open Sans", sans-serif;
   font-size: 1.0em;
   color: #{$base-font-color};
-  margin: 0px;
+  margin: 0px auto;
   padding: 0px;
 }
 
+em, strong, time {
+  font-family: "Raleway", sans-serif;
+}
+
+time {
+  font-variant: oldstyle-nums;
+  text-transform: lowercase;
+}
+
 h2, h3, h4, h5, h6 {
-  font-family: "Hiragino Kaku Gothic Pro W3", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ", "MS P Gothic", "ＭＳ Ｐゴシック", sans-serif;
+  font-family: "Droid Serif", serif;
 }
 
 .site_metas {
@@ -38,18 +48,34 @@ header[role="banner"] {
       font-size: 2.5em;
       font-weight: 100;
     }
-    h2 { display: none; }
+    h2 {
+      margin: 0px;
+      padding: 0px;
+      font-size: 1em;
+      font-weight: 100;
+    }
     margin: 0px;
     padding: 0px;
   }
 
-  margin: 30px 50px 50px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
   @media screen and (max-width: 600px) {
     margin: auto;
-    text-align: center;
   }
   padding: 0px;
   position: relative;
+}
+
+/* horizontal rules */
+hr {
+    border: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    outline: none;
+    height: 3px;
+    background: transparent url("/images/hr.gif") center center repeat-x;
 }
 
 /* social-links */
@@ -102,8 +128,8 @@ header[role="banner"] {
 /* /social-links */
 
 #content{
-  margin: 8px auto;
-  max-width: #{$max-width};
+  margin-top: 20px;
+  margin-bottom: 20px;
   a{
     color: #33c;
   }
@@ -120,6 +146,10 @@ header[role="banner"] {
     margin-top: .6em;
     font-style: italic;
   }
+  @media screen and (max-width: 600px) {
+      margin-left: 5px;
+      margin-right: 5px;
+  }
 }
 .entry > header{
   margin: 50px 0px;
@@ -134,7 +164,7 @@ footer[role="contentinfo"]{
   @extend .site_metas;
   text-align: center;
   margin: 0px;
-  padding: 8px;
+  padding: 0px;
   font-size: 80%;
   p {
     margin: 0px;

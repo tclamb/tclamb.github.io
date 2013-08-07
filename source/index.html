@@ -4,8 +4,8 @@ is_top: true
 ---
 <div id="top">
 
-  <div id="recent_posts">
-    <h2>recent posts</h2>
+  <section id="recent_posts">
+    <h1>recent posts</h1>
 
     <ul>
     {% for post in paginator.posts %}
@@ -20,11 +20,8 @@ is_top: true
 
     <p><a href="/blog/archives">&laquo; post archive</a></p>
 
-  </div>
+  </section>
 
-
-  <!-- include asides.html -->
   {% include asides.html %}
-  <!-- /include asides.html -->
 
 </div>
