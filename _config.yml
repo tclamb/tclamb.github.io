@@ -66,9 +66,9 @@ sharing: false
 
 # Github repositories
 github_user: tclamb
-github_repo_count: 2
-github_show_profile_link: true
-github_skip_forks: true
+github_repo_count: 6
+github_show_profile_link: false
+github_skip_forks: false
 # github api v3 params
 # see http://developer.github.com/v3/repos/#list-user-repositories
 github_type: all
