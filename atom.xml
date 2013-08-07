@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[tclamb]]></title>
+  <link href="http://tclamb.github.io/atom.xml" rel="self"/>
+  <link href="http://tclamb.github.io/"/>
+  <updated>2013-08-07T14:39:06-04:00</updated>
+  <id>http://tclamb.github.io/</id>
+  <author>
+    <name><![CDATA[Thomas Lamb]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
