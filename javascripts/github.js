@@ -20,13 +20,14 @@ var github = (function(){
         , type: 'jsonp'
         , error: function (err) {
           $(options.target + ' li.loading').addClass('error')
-            .text("読み込み失敗");
+            .text("error");
         }
         , success: function(data) {
           var repos = [];
           if (!data || !data.data) { return; }
           for (var i = 0; i < options.count; i++) {
-            if (options.skip_forks && data.data[i].fork) { continue; }
+            if (!data.data[i]) { return; }
+            if (options.skip_forks && data.data[i].fork) { data.data.splice(i--, 1); continue; }
             repos.push(data.data[i]);
           }
           // repos.sort(function(a, b) {
