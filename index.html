@@ -8,7 +8,7 @@
 <title>tclamb</title>
 <meta name="author" content="Thomas Lamb">
 <meta name="description"
-      content="recent posts hello, world! （Aug 7th, 2013） &raquo; post archive git repositories &mdash; github loading&#8230; @tclamb on github $.domReady(function &hellip;">
+      content="recent posts hello, world! （Aug 7th, 2013） &raquo; post archive git repositories &mdash; github loading&#8230; $.domReady(function(){ if (!window. &hellip;">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -108,8 +108,6 @@
     <li class="loading">loading&#8230;</li>
   </ul>
   
-  <a href="https://github.com/tclamb">@tclamb</a> on github
-  
   <script type="text/javascript">
     $.domReady(function(){
         if (!window.jXHR){
@@ -122,8 +120,8 @@
 
         github.showRepos({
             user: 'tclamb',
-            count: 2,
-            skip_forks: true,
+            count: 6,
+            skip_forks: false,
             type: 'all',
             sort: 'updated',
             direction: 'desc',
