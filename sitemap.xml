@@ -1,11 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://tclamb.github.io/blog/2013/08/07/hello-world/</loc>
+        <lastmod>2013-08-07T17:27:47-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://tclamb.github.io/blog/archives/</loc>
-        <lastmod>2013-08-07T14:35:55-04:00</lastmod>
+        <lastmod>2013-08-07T17:27:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tclamb.github.io/</loc>
-        <lastmod>2013-08-07T14:37:38-04:00</lastmod>
+        <lastmod>2013-08-07T18:00:33-04:00</lastmod>
     </url>
 </urlset>
