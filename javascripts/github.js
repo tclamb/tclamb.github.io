@@ -4,10 +4,29 @@ var github = (function(){
     var i = 0, fragment = '', t = $(target)[0];
 
     for(i = 0; i < repos.length; i++) {
-      fragment += '<li><a href="'+repos[i].html_url+'">'+repos[i].name+'</a> : '+
+      fragment += '<li><a href="'+repos[i].html_url+'">'+repos[i].full_name+'</a> : '+
         repos[i].description+'</li>';
     }
     t.innerHTML = fragment;
+  }
+  function renderSources(options, repos){
+    var requests = repos.map(function(repo, i){
+      return jQuery.ajax({
+        url: "https://api.github.com/repos/"+repo.full_name+"?callback=?"
+        , dataType: 'json'
+        , error: function(err) {
+          $(options.target + ' li.loading').addClass('error')
+            .text("error");
+        }
+        , success: function(data) {
+          if (!data || !data.data || !data.data.source) { return; }
+          repos[i] = data.data.source;
+        }
+      });
+    });
+    // Reqwests! doesn't support when() for its promises
+    // so revert to using jQuery AJAX requests
+    jQuery.when.apply(undefined, requests).then(function(){render(options.target, repos);});
   }
   return {
     showRepos: function(options){
@@ -30,15 +49,8 @@ var github = (function(){
             if (options.skip_forks && data.data[i].fork) { data.data.splice(i--, 1); continue; }
             repos.push(data.data[i]);
           }
-          // repos.sort(function(a, b) {
-          //   var aDate = new Date(a.pushed_at).valueOf(),
-          //   bDate = new Date(b.pushed_at).valueOf();
-
-          //   if (aDate === bDate) { return 0; }
-          //   return aDate > bDate ? -1 : 1;
-          // });
-
-          render(options.target, repos);
+          renderSources(options, repos);
+          //render(options.target, repos);
         }
       });
     }
