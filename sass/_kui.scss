@@ -10,7 +10,16 @@ body {
   font-size: 1.0em;
   color: #{$base-font-color};
   margin: 0px auto;
-  padding: 0px;
+  padding: 0px 5px;
+}
+
+/* horizontal rules */
+hr {
+    border: 0;
+    margin: 5px -5px;
+    outline: none;
+    height: 3px;
+    background: transparent url("/images/hr.gif") center center repeat-x;
 }
 
 em, strong, time {
@@ -66,16 +75,6 @@ header[role="banner"] {
   }
   padding: 0px;
   position: relative;
-}
-
-/* horizontal rules */
-hr {
-    border: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    outline: none;
-    height: 3px;
-    background: transparent url("/images/hr.gif") center center repeat-x;
 }
 
 /* social-links */
@@ -145,10 +144,6 @@ hr {
   dt{
     margin-top: .6em;
     font-style: italic;
-  }
-  @media screen and (max-width: 600px) {
-      margin-left: 5px;
-      margin-right: 5px;
   }
 }
 .entry > header{
