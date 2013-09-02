@@ -3,11 +3,11 @@
 $max-width: 500px;
 $base-font-color: #444;
 
-#comments { display: none; }
+//#comments { display: none; }
 body {
   max-width: #{$max-width};
   font-family: "Open Sans", sans-serif;
-  font-size: 1.0em;
+  font-size: 1.2em;
   color: #{$base-font-color};
   margin: 0px auto;
   padding: 0px 5px;

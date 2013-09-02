@@ -2,7 +2,7 @@
 layout: post
 title: "MathJax test"
 date: 2013-09-01 12:15
-comments: true
+comments: false
 categories: 
 ---
 
