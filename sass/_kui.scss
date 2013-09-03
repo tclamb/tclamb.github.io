@@ -1,13 +1,12 @@
 /* -*- mode:css coding:utf-8 -*- */
 
-$max-width: 500px;
+$max-width: 896px;
 $base-font-color: #444;
 
 //#comments { display: none; }
 body {
-  max-width: #{$max-width};
   font-family: "Open Sans", sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: #{$base-font-color};
   margin: 0px auto;
   padding: 0px 5px;
@@ -16,9 +15,10 @@ body {
 /* horizontal rules */
 hr {
     border: 0;
-    margin: 5px -5px;
+    margin: 5px auto;
     outline: none;
     height: 3px;
+    max-width: #{$max-width + 42px};
     background: transparent url("/images/hr.gif") center center repeat-x;
 }
 
@@ -52,25 +52,26 @@ header[role="banner"] {
   }
   hgroup{
     h1 {
-      margin: 0px;
-      padding: 0px;
+      margin: 0;
+      padding: 0;
       font-size: 2.5em;
       font-weight: 100;
     }
     h2 {
-      margin: 0px;
-      padding: 0px;
+      margin: 0;
+      padding: 0;
       font-size: 1em;
       font-weight: 100;
     }
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     margin-bottom: 0.5em;
   }
 
   text-align: center;
-  margin: 0px;
-  padding: 0px;
+  max-width: #{$max-width};
+  margin: 0 auto;
+  padding: 0;
   position: relative;
 }
 
@@ -124,8 +125,7 @@ header[role="banner"] {
 /* /social-links */
 
 #content{
-  margin-top: -10px;
-  margin-bottom: 20px;
+  margin: -10px auto 20px;
   a{
     color: #33c;
   }
@@ -142,10 +142,33 @@ header[role="banner"] {
     margin-top: .6em;
     font-style: italic;
   }
+  #page{
+      max-width: #{$max-width};
+      margin: 0 auto;
+  }
 }
 .entry > header{
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin: 30px auto 20px;
+  max-width: #{$max-width};
+}
+.entry > footer{
+  margin: 0 auto;
+  max-width: #{$max-width};
+}
+.entry > p {
+  margin-bottom: 1em;
+}
+.entry_content > :not([type=div]) {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: #{$max-width};
+}
+.entry_content > blockquote > :not([type=div]){
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.entry_content > h3 {
+  margin: 1em auto 0.5em;
 }
 
 
@@ -156,11 +179,12 @@ p.meta{
 footer[role="contentinfo"]{
   @extend .site_metas;
   text-align: center;
-  margin: 0px;
-  padding: 0px;
+  margin: 0 auto;
+  max-width: #{$max-width};
+  padding: 0;
   font-size: 80%;
   p {
-    margin: 0px;
+    margin: 0;
   }
 }
 
