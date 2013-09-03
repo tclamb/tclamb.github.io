@@ -3,11 +3,12 @@ layout: post
 title: "lambda type erasure"
 date: 2013-09-02 17:31
 comments: false
-categories: 
+categories: c++11, template metaprogramming
 ---
 
-### extracting call signature from lambda type
-Thanks to [ecatmur](http://stackoverflow.com/users/567292/ecatmur) from [stackoverflow](http://stackoverflow.com/) for his work on [this question](http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio).
+Special thanks to [ecatmur](http://stackoverflow.com/users/567292/ecatmur) at [stackoverflow](http://stackoverflow.com/), from whose [work](http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio) this is adapted. 
+
+### step 1: extract the call signature from lambda type
 {% codeblock lang:cpp %}
 template<typename T> struct remove_class {};
 template<typename R, typename C, typename... A>
@@ -16,7 +17,7 @@ template<typename R, typename C, typename... A>
     struct remove_class<R(C::*)(A...) const> { using type = R(A...); };
 {% endcodeblock %}
 
-### lambda as a function
+### step 2: define helper type
 {% codeblock lang:cpp %}
 template<typename F>
 using function_t = std::function< typename remove_class<
@@ -24,7 +25,7 @@ using function_t = std::function< typename remove_class<
 >::type >;
 {% endcodeblock %}
 
-### helper function
+### step 3: define helper function
 {% codeblock lang:cpp %}
 template <typename F>
 function_t<F> make_function(F&& functor) {
