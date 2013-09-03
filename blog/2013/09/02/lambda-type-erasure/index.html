@@ -1,24 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[tclamb]]></title>
-  <link href="http://tclamb.github.io/atom.xml" rel="self"/>
-  <link href="http://tclamb.github.io/"/>
-  <updated>2013-09-02T19:54:27-04:00</updated>
-  <id>http://tclamb.github.io/</id>
-  <author>
-    <name><![CDATA[Thomas Lamb]]></name>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+
+<meta charset="utf-8">
+<title>lambda type erasure - tclamb</title>
+<meta name="author" content="Thomas Lamb">
+<meta name="description"
+      content="lambda type erasure extracting call signature from lambda type
+Thanks to ecatmur from stackoverflow for his work on this question. 1
+2
+3
+4
+5 &hellip;">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="canonical" href="http://tclamb.github.io/blog/2013/09/02/lambda-type-erasure">
+<link href="/favicon.png" rel="icon">
+<link href="http://fonts.googleapis.com/css?family=Droid+Serif|Raleway|Open+Sans"
+      rel="stylesheet"
+      type='text/css'>
+<link href="/stylesheets/screen.css"
+      media="screen, projection"
+      rel="stylesheet"
+      type="text/css">
+<link href="/atom.xml"
+      rel="alternate"
+      title="tclamb"
+      type="application/atom+xml">
+
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/javascripts/modernizr-2.0.js" type="text/javascript"></script>
+<script src="/javascripts/ender.js" type="text/javascript"></script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-43030634-1']);
+  _gaq.push(['_trackPageview']);  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+      '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  </head>
+  <body>
+    <header role="banner" class="site_metas">
+      
+<hgroup>
+  <h1><a href="/">tclamb</a></h1>
+  
+  <h2>programming, c++ and otherwise</h2>
+  
+</hgroup>
+
+    </header>
+
+    <hr>
+
+    <div id="content">
+	  
 
   
-  <entry>
-    <title type="html"><![CDATA[lambda type erasure]]></title>
-    <link href="http://tclamb.github.io/blog/2013/09/02/lambda-type-erasure/"/>
-    <updated>2013-09-02T17:31:00-04:00</updated>
-    <id>http://tclamb.github.io/blog/2013/09/02/lambda-type-erasure</id>
-    <content type="html"><![CDATA[<h3 id="extracting-call-signature-from-lambda-type">extracting call signature from lambda type</h3>
+
+
+<article class="entry" role="article">
+
+  <header>
+    <h2 class="entry_title">lambda type erasure</h2>
+    
+  </header>
+
+  <div class="entry_content"><h3 id="extracting-call-signature-from-lambda-type">extracting call signature from lambda type</h3>
 <p>Thanks to <a href="http://stackoverflow.com/users/567292/ecatmur">ecatmur</a> from <a href="http://stackoverflow.com/">stackoverflow</a> for his work on <a href="http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio">this question</a>.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -185,34 +265,55 @@
 </span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MathJax test]]></title>
-    <link href="http://tclamb.github.io/blog/2013/09/01/mathjax-test/"/>
-    <updated>2013-09-01T12:15:00-04:00</updated>
-    <id>http://tclamb.github.io/blog/2013/09/01/mathjax-test</id>
-    <content type="html"><![CDATA[<h3 id="some-integrals">some integrals</h3>
-<p>$$\begin{align}
-\int_0^\infty x^n e^{-ax} \,dx &amp;= \frac{n!}{a^{n+1}} &#92;\
-\int_0^\infty e^{-ax} \sin(bx) \,dx &amp;= \frac{b}{a^2 + b^2} &#92;\
-\int_0^\infty e^{-ax} \cos(bx) \,dx &amp;= \frac{a}{a^2 + b^2}
-\end{align}$$</p>
+</div>
 
-<h3 id="currying">currying</h3>
-<p>Given some function of three arguments $f : (X \times Y \times Z) \rightarrow N$, currying will transform $f$ into $\mathop{\mathrm{curry}}(f) : X \rightarrow \bigl( Y \rightarrow \left( Z \rightarrow N \right) \bigr)$, a chain of functions each taking one argument.</p>
+  <footer>
+    <p class="meta">
 
-]]></content>
-  </entry>
+      
+
+      
+      <time datetime="2013-09-02 17:31:00 -0400" pubdate>Sep 2<span>nd</span>, 2013</time>
+      
+
+      
+      <span class="categories">
+	
+      </span>
+      
+
+    </p>
+
+    
+
+    
+
+  </footer>
   
-  <entry>
-    <title type="html"><![CDATA[hello, world!]]></title>
-    <link href="http://tclamb.github.io/blog/2013/08/07/hello-world/"/>
-    <updated>2013-08-07T17:22:00-04:00</updated>
-    <id>http://tclamb.github.io/blog/2013/08/07/hello-world</id>
-    <content type="html"><![CDATA[<blockquote><p>The most important thing I learned on Tralfamadore was that when a person dies he only appears to die. He is still very much alive in the past, so it is very silly for people to cry at his funeral. All moments, past, present and future, always have existed, always will exist. The Tralfamadorians can look at all the different moments just that way we can look at a stretch of the Rocky Mountains, for instance. They can see how permanent all the moments are, and they can look at any moment that interests them. It is just an illusion we have here on Earth that one moment follows another one, like beads on a string, and that once a moment is gone it is gone forever.</p><p>When a Tralfamadorian sees a corpse, all he thinks is that the dead person is in a bad condition in that particular moment, but that the same person is just fine in plenty of other moments. Now, when I myself hear that somebody is dead, I simply shrug and say what the Tralfamadorians say about dead people, which is &#8220;so it goes.”</p><footer><strong>&mdash; Kurt Vonnegut in <em>Slaughterhouse-Five</em></strong></footer></blockquote>
-]]></content>
-  </entry>
-  
-</feed>
+</div>
+
+    </div>
+
+    <hr>
+
+    <footer role="contentinfo">
+	  <p>
+  &copy; 2013 - Thomas Lamb -
+  <span class="credit">powered by <a href="http://octopress.org">octopress</a> and based on <a href="http://k-ui.jp">k-ui</a>'s <a href="https://github.com/kui/k-ui-octopress-theme">octopress theme</a></span>
+</p>
+
+    </footer>
+      
+    
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
