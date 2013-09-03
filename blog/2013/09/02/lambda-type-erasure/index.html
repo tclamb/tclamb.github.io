@@ -8,12 +8,7 @@
 <title>lambda type erasure - tclamb</title>
 <meta name="author" content="Thomas Lamb">
 <meta name="description"
-      content="lambda type erasure extracting call signature from lambda type
-Thanks to ecatmur from stackoverflow for his work on this question. 1
-2
-3
-4
-5 &hellip;">
+      content="lambda type erasure Special thanks to ecatmur at stackoverflow, from whose work this is adapted. step 1: extract the call signature from lambda type &hellip;">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -98,8 +93,9 @@ MathJax.Hub.Config({
     
   </header>
 
-  <div class="entry_content"><h3 id="extracting-call-signature-from-lambda-type">extracting call signature from lambda type</h3>
-<p>Thanks to <a href="http://stackoverflow.com/users/567292/ecatmur">ecatmur</a> from <a href="http://stackoverflow.com/">stackoverflow</a> for his work on <a href="http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio">this question</a>.</p>
+  <div class="entry_content"><p>Special thanks to <a href="http://stackoverflow.com/users/567292/ecatmur">ecatmur</a> at <a href="http://stackoverflow.com/">stackoverflow</a>, from whose <a href="http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio">work</a> this is adapted. </p>
+
+<h3 id="step-1-extract-the-call-signature-from-lambda-type">step 1: extract the call signature from lambda type</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -113,7 +109,7 @@ MathJax.Hub.Config({
 </span><span class="line">    <span class="k">struct</span> <span class="n">remove_class</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">C</span><span class="o">::*</span><span class="p">)(</span><span class="n">A</span><span class="p">...)</span> <span class="k">const</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">using</span> <span class="n">type</span> <span class="o">=</span> <span class="n">R</span><span class="p">(</span><span class="n">A</span><span class="p">...);</span> <span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="lambda-as-a-function">lambda as a function</h3>
+<h3 id="step-2-define-helper-type">step 2: define helper type</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -125,7 +121,7 @@ MathJax.Hub.Config({
 </span><span class="line"><span class="o">&gt;::</span><span class="n">type</span> <span class="o">&gt;</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="helper-function">helper function</h3>
+<h3 id="step-3-define-helper-function">step 3: define helper function</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -278,7 +274,7 @@ MathJax.Hub.Config({
 
       
       <span class="categories">
-	
+	<a class='category' href='/blog/categories/c-plus-plus-11/'>c++11,</a>, <a class='category' href='/blog/categories/metaprogramming/'>metaprogramming</a>, <a class='category' href='/blog/categories/template/'>template</a>
       </span>
       
 
