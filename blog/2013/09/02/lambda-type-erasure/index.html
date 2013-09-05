@@ -8,7 +8,8 @@
 <title>lambda type erasure - tclamb</title>
 <meta name="author" content="Thomas Lamb">
 <meta name="description"
-      content="lambda type erasure Special thanks to ecatmur at stackoverflow, from whose work this is adapted. step 1: extract the call signature from lambda type &hellip;">
+      content="lambda type erasure Special thanks to ecatmur at stackoverflow, from whose work this is adapted. the problem
+The type of a lambda is specified by &hellip;">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -95,6 +96,11 @@ MathJax.Hub.Config({
 
   <div class="entry_content"><p>Special thanks to <a href="http://stackoverflow.com/users/567292/ecatmur">ecatmur</a> at <a href="http://stackoverflow.com/">stackoverflow</a>, from whose <a href="http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio">work</a> this is adapted. </p>
 
+<h3 id="the-problem">the problem</h3>
+<p>The type of a lambda is specified by the standard to be anonymous. However, this makes templates depending on the arguments or return type of a lambda night impossible to easily code. The solution: ignore the type of the lambda entirely, and instead, “steal” its <code>operator()</code>, storing it in a <code>std::function</code>, whose call signature is easily determined.</p>
+
+<p>In this article, we define a helper function (ala <code>make_unique</code>) that takes a lambda and transforms it into a <code>std::function</code> with the same call signature and function body.</p>
+
 <h3 id="step-1-extract-the-call-signature-from-lambda-type">step 1: extract the call signature from lambda type</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -109,6 +115,12 @@ MathJax.Hub.Config({
 </span><span class="line">    <span class="k">struct</span> <span class="n">remove_class</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">C</span><span class="o">::*</span><span class="p">)(</span><span class="n">A</span><span class="p">...)</span> <span class="k">const</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">using</span> <span class="n">type</span> <span class="o">=</span> <span class="n">R</span><span class="p">(</span><span class="n">A</span><span class="p">...);</span> <span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>Unfortunately, partial specializations of functions don’t exist. Therefore, we have to create helper structs. These are ubiquitous in C++ template metaprogramming, so you should at least get comfortable with the concept.</p>
+
+<p>Following the style of <code>&lt;type_traits&gt;</code>, we can define a helper struct that transforms the type of member functions into the call signature of a plain function with the same return type and argument types.</p>
+
+<p>For a lambda, we are guaranteed by the standard that if the lambda isn’t polymorphic (not a problem in C++11), it has an <code>operator()</code> with a well-defined call signature. Therefore, if we provide the type of its <code>operator()</code> (a class member function type), we can discard the class type (which is an “unknowable” lambda object type) and retain the return value and arguments. We do this.</p>
+
 <h3 id="step-2-define-helper-type">step 2: define helper type</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -120,6 +132,12 @@ MathJax.Hub.Config({
 </span><span class="line">    <span class="n">decltype</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">::</span><span class="k">operator</span><span class="p">()</span> <span class="p">)</span>
 </span><span class="line"><span class="o">&gt;::</span><span class="n">type</span> <span class="o">&gt;</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Remember the ultimate goal is to define a helper function (ala <code>make_shared()</code>) that converts a lambda to a <code>std::function</code> of the same call signature. Thus, the return value should be a <code>std::function&lt;R(a...)&gt;</code>, with <code>R</code> being the return type and <code>A...</code> any arguments. Sounds like a problem for <code>remove_class</code>!</p>
+
+<p><code>std::remove_reference</code> allows this to work for both rvalues and lvalues of lambda types. In brief, <code>std::remove_reference&lt;F&gt;::type</code> is the same type as <code>F</code>, minus any number of <code>&amp;</code> (i.e. if <code>F</code> is of type <code>int</code>, <code>int&amp;</code> or <code>int&amp;&amp;</code>, it is of type <code>int</code>). So we are using <code>decltype</code> to get the call signature of its <code>operator()</code>, a member function. <code>remove_class</code> then removes the class from the member function call signature, and all that remains is what we expect.</p>
+
+<p>In short, <code>function_t&lt;[lambda type]&gt;</code> is the equivalent <code>std::function</code> type of any given monomorphic lambda type.</p>
 
 <h3 id="step-3-define-helper-function">step 3: define helper function</h3>
 
@@ -133,7 +151,10 @@ MathJax.Hub.Config({
 </span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>The helper function just forwards the given lambda to the constructor of the appropriate <code>std::function</code> constructor. This makes <code>auto f = make_function([](A... args) { /*stuff*/ });</code> equivalent to <code>std::function&lt;R(A...)&gt; f = [](A... args){ /*stuff*/ };</code> or <code>auto f = std::function&lt;R(A...)&gt;{ [](A... args){ /*stuff*/ } };</code>. Convenient, right?</p>
+
 <h3 id="example-usage">example usage</h3>
+<p>Here’s a sample program utilizing <code>make_function()</code> as defined above.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -166,8 +187,10 @@ MathJax.Hub.Config({
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="putting-it-all-together">putting it all together</h3>
+<p>Here’s the complete definition of <code>make_function()</code> and <code>function_t</code>. Feel free to include this in any of your code without attribution to myself. Have fun!</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>make_function.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -274,7 +297,7 @@ MathJax.Hub.Config({
 
       
       <span class="categories">
-	<a class='category' href='/blog/categories/c-plus-plus-11/'>c++11,</a>, <a class='category' href='/blog/categories/metaprogramming/'>metaprogramming</a>, <a class='category' href='/blog/categories/template/'>template</a>
+	<a class='category' href='/blog/categories/c-plus-plus-11/'>c++11</a>, <a class='category' href='/blog/categories/template-metaprogramming/'>template-metaprogramming</a>
       </span>
       
 
