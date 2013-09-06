@@ -3,6 +3,18 @@
 $max-width: 896px;
 $base-font-color: #444;
 
+p{
+  margin-bottom:20px;
+}
+p+p{
+  text-indent: 2em;
+  margin-top:-20px;
+}
+
+code {
+  text-indent: 0;
+}
+
 //#comments { display: none; }
 body {
   font-family: "Open Sans", sans-serif;
