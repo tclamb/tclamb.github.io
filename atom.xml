@@ -4,7 +4,7 @@
   <title><![CDATA[tclamb]]></title>
   <link href="http://tclamb.github.io/atom.xml" rel="self"/>
   <link href="http://tclamb.github.io/"/>
-  <updated>2013-09-05T22:55:44-04:00</updated>
+  <updated>2013-10-01T16:12:32-04:00</updated>
   <id>http://tclamb.github.io/</id>
   <author>
     <name><![CDATA[Thomas Lamb]]></name>
@@ -21,9 +21,9 @@
     <content type="html"><![CDATA[<p>Special thanks to <a href="http://stackoverflow.com/users/567292/ecatmur">ecatmur</a> at <a href="http://stackoverflow.com/">stackoverflow</a>, from whose <a href="http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio">work</a> this is adapted. </p>
 
 <h3 id="the-problem">the problem</h3>
-<p>The type of a lambda is specified by the standard to be anonymous. However, this makes templates depending on the arguments or return type of a lambda night impossible to easily code. The solution: ignore the type of the lambda entirely, and instead, “steal” its <code>operator()</code>, storing it in a <code>std::function</code>, whose call signature is easily determined.</p>
+<p>The type of a lambda is specified by the standard to be anonymous. However, this makes templates depending on the arguments or return type of a lambda nigh impossible to easily code. The solution: ignore the type of the lambda entirely, and instead, “steal” its <code>operator()</code>, storing it in a <code>std::function</code>, whose call signature is easily determined.</p>
 
-<p>In this article, we define a helper function (ala <code>make_unique</code>) that takes a lambda and transforms it into a <code>std::function</code> with the same call signature and function body.</p>
+<p>In this article, we define a helper function (ala <code>make_unique</code>) that takes a lambda and transforms it into a <code>std::function</code> with the same call signature and function body. This method actually generalizes to any class with an <code>::operator()</code> member defined.</p>
 
 <h3 id="step-1-extract-the-call-signature-from-lambda-type">step 1: extract the call signature from lambda type</h3>
 
