@@ -9,9 +9,9 @@ categories: c++11 template-metaprogramming
 Special thanks to [ecatmur](http://stackoverflow.com/users/567292/ecatmur) at [stackoverflow](http://stackoverflow.com/), from whose [work](http://stackoverflow.com/questions/11893141/inferring-the-call-signature-of-a-lambda-or-arbitrary-callable-for-make-functio) this is adapted. 
 
 ### the problem
-The type of a lambda is specified by the standard to be anonymous. However, this makes templates depending on the arguments or return type of a lambda night impossible to easily code. The solution: ignore the type of the lambda entirely, and instead, "steal" its `operator()`, storing it in a `std::function`, whose call signature is easily determined.
+The type of a lambda is specified by the standard to be anonymous. However, this makes templates depending on the arguments or return type of a lambda nigh impossible to easily code. The solution: ignore the type of the lambda entirely, and instead, "steal" its `operator()`, storing it in a `std::function`, whose call signature is easily determined.
 
-In this article, we define a helper function (ala `make_unique`) that takes a lambda and transforms it into a `std::function` with the same call signature and function body.
+In this article, we define a helper function (ala `make_unique`) that takes a lambda and transforms it into a `std::function` with the same call signature and function body. This method actually generalizes to any class with an `::operator()` member defined.
 
 ### step 1: extract the call signature from lambda type
 {% codeblock lang:cpp %}
